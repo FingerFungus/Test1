@@ -281,12 +281,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327478553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.86, y: -3.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.01, y: -0.6770274, z: 0}
+  m_LocalScale: {x: 0.77841663, y: 0.53309244, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1660332575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -521,7 +521,8 @@ GameObject:
   - component: {fileID: 1660332574}
   - component: {fileID: 1660332573}
   - component: {fileID: 1660332572}
-  - component: {fileID: 1660332571}
+  - component: {fileID: 1660332577}
+  - component: {fileID: 1660332576}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -529,39 +530,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1660332571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660332570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254374cc36865cc4ca51ef3bb0701e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 8
-  jumpForce: 12
-  maxAirJumps: 1
-  dashSpeed: 25
-  dashDuration: 0.15
-  dashCooldown: 0.8
-  attackDamage: 10
-  attackCooldown: 0.4
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 0.15
-  groundLayer:
-    m_Bits: 0
-  rb: {fileID: 0}
-  moveInput: 0
-  isGrounded: 0
-  airJumpsLeft: 0
-  facingRight: 1
-  isDashing: 0
-  dashTimer: 0
-  lastDashTime: -10
-  lastAttackTime: -10
 --- !u!50 &1660332572
 Rigidbody2D:
   serializedVersion: 5
@@ -706,9 +674,34 @@ Transform:
   m_LocalPosition: {x: -2.78, y: -1.81, z: 0}
   m_LocalScale: {x: 1.2846591, y: 1.8758473, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 327478554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1660332576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660332570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504177884b6313240a34bd6e1e48310f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+--- !u!114 &1660332577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660332570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a506b9836646140a4aba9b0f887cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -717,4 +710,3 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 33687882}
   - {fileID: 1660332575}
-  - {fileID: 327478554}
