@@ -3,42 +3,79 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-public float speed = 10f;
-public float jumpPower = 15f;
-public int extraJumps = 1;
-[SerializeField] private LayerMask groundLayer;
-[SerializeField] private Rigidbody2D rb;
-[SerializeField] private Transform GroundCheck;
+    public float speed = 10f;
+    public float jumpPower = 15f;
+    public int extraJumps = 1;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform GroundCheck;
 
+    private int jumpCount = 0;
+    private bool isGrounded;
+    private float mx;
+    private float jumpCooldown;
 
-int jumpCount = 0; 
-bool isGrounded;
-float mx;
-float jumpCooldown;
-
-private void Update()
-{
-    var keyboard = Keyboard.current;
-    mx = 0;
-    if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) mx += 1;
-    if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) mx -= 1;
-    isGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.1f, groundLayer);
-
-    if (isGrounded)
+    private void Update()
     {
-        jumpCount = 0; 
+        // Use new Input System instead of old Input.GetAxis
+        var keyboard = Keyboard.current;
+        var gamepad = Gamepad.current;
+        mx = 0f;
+        if (keyboard != null)
+        {
+            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) mx -= 1f;
+            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) mx += 1f;
+        }
+        if (gamepad != null)
+        {
+            mx += gamepad.leftStick.x.ReadValue();
+        }
+
+        // Use new Input System for jump
+        bool jumpPressed = (keyboard != null && keyboard.spaceKey.wasPressedThisFrame) ||
+                           (gamepad != null && gamepad.buttonSouth.wasPressedThisFrame);
+        if (jumpPressed)
+        {
+            Jump();
+        }
+
+        CheckGrounded();
     }
 
-    if (Keyboard.current.spaceKey.wasPressedThisFrame && (isGrounded || jumpCount < extraJumps) && Time.time > jumpCooldown)
+    private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(mx * speed, rb.linearVelocity.y);
+        }
+    }
+
+
+
+void Jump()
+{
+    // Fixed: Only allow extra jumps after the first (initial) jump
+    if ((isGrounded || (jumpCount > 0 && jumpCount <= extraJumps)) && Time.time > jumpCooldown)
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+        }
         jumpCount++;
-        jumpCooldown = Time.time + 0.5f; 
+        jumpCooldown = Time.time + 0.2f;  // Short cooldown to prevent spam
     }
 }
 
-private void FixedUpdate()
+
+void CheckGrounded()
 {
-    rb.linearVelocity = new Vector2(mx * speed, rb.linearVelocity.y);
+    // Fixed: Simply check overlap; no incorrect cooldown logic
+    isGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.5f, groundLayer);
+    if (isGrounded && rb != null && rb.linearVelocity.y <= 0)
+    {
+        jumpCount = 0;
+    }
 }
+
+
 }
