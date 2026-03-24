@@ -1,3 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="MainContainer" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0);"/>
+    <ui:VisualElement name="MainContainer" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0);">
+        <ui:VisualElement name="Primary" style="flex-grow: 0; flex-basis: auto; flex-direction: column; align-self: auto; flex-shrink: 1; min-width: auto; height: 800px; width: 600px; position: relative; left: 10%; top: auto; justify-content: flex-start; align-content: auto;"/>
+    </ui:VisualElement>
 </ui:UXML>
