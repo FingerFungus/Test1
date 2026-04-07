@@ -3,7 +3,7 @@
     <ui:VisualElement name="MainContainer" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0);">
         <ui:VisualElement name="Frame" style="flex-grow: 0; flex-basis: auto; flex-direction: column; align-self: auto; flex-shrink: 1; min-width: auto; height: 700px; width: 550px; position: relative; left: 10%; top: 10%; justify-content: flex-start; align-content: auto; bottom: auto; background-image: url(&quot;project://database/Assets/Main_menu/Free%20UI%20build%20package/Art/Bars_Unity.png?fileID=21300040&amp;guid=34ecf51bcd3f4424eafda7dafd885bd0&amp;type=3#Bars_Unity_20&quot;); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(143, 129, 154);">
             <ui:VisualElement name="Backdrop" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Main_menu/Free%20UI%20build%20package/Art/Bars_Unity.png?fileID=21300024&amp;guid=34ecf51bcd3f4424eafda7dafd885bd0&amp;type=3#Bars_Unity_12&quot;); width: 80%; height: 85%; align-self: flex-start; position: relative; left: 9%; top: 7%; -unity-background-image-tint-color: rgb(162, 121, 188);">
-                <ui:Button text="Play" name="Button" class="defaultButton"/>
+                <ui:Button text="Play" name="Play" selectable="false" focusable="false" double-click-selects-word="true" class="defaultButton" style="top: 5%;"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
