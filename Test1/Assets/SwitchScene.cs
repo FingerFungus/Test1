@@ -23,7 +23,8 @@ public class MainMenuController : MonoBehaviour
 
     private void OnButtonClicked()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("LoadingScreen");
+        
     }
 }
 
