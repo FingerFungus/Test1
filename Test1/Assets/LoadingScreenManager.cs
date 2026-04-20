@@ -3,38 +3,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingScreenManager : MonoBehaviour
+public class LoadingScreen : MonoBehaviour
 {
-    public Slider progressBar;
-    public Text loadingText;         // optional "Loading... X%" text
-    public string SampleScene;
+    public GameObject loadingPanel; // Reference to your UI panel
+    //public Slider progressBar;      // Reference to a UI Slider
+    //public Text progressText;       // Optional: Reference to a UI Text
 
-    void Start()
+    public void LoadLevel(int sceneIndex)
     {
-        StartCoroutine(LoadSceneAsync());
+        StartCoroutine(LoadAsync(sceneIndex));
     }
 
-    IEnumerator LoadSceneAsync()
+    IEnumerator LoadAsync(int sceneIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync("SampleScene");
-        operation.allowSceneActivation = false;
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        
+        loadingPanel.SetActive(true);
 
         while (!operation.isDone)
         {
+            // progress is 0 to 0.9 (loading) and 1.0 (activation)
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-
-            if (progressBar) progressBar.value = progress;
-            if (loadingText) loadingText.text = $"Loading... {(int)(progress * 100)}%";
-
-            // Activate scene when fully loaded
-            if (operation.progress >= 0.9f)
-            {
-                yield return new WaitForSeconds(0.5f); // brief pause so it doesn't flash
-                operation.allowSceneActivation = true;
-            }
+            
+            if (progressBar != null) progressBar.value = progress;
+            if (progressText != null) progressText.text = (progress * 100f).ToString("F0") + "%";
 
             yield return null;
         }
     }
 }
-
