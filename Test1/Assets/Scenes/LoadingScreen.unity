@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 712662460}
   - component: {fileID: 712662459}
   - component: {fileID: 712662463}
-  - component: {fileID: 712662462}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -213,21 +212,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &712662462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712662458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d808b323e3a6b4fa85c65fc258feb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LoadingScreenManager
-  loadingPanel: {fileID: 712662458}
-  progressBar: {fileID: 0}
-  progressText: {fileID: 0}
 --- !u!114 &712662463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +267,7 @@ GameObject:
   - component: {fileID: 1135272819}
   - component: {fileID: 1135272821}
   - component: {fileID: 1135272820}
+  - component: {fileID: 1135272822}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -347,6 +332,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135272818}
   m_CullTransparentMesh: 1
+--- !u!114 &1135272822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135272818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0367e0910e3c81b40b2e9744f3adf960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadingScreen
+  loadingPanel: {fileID: 1135272818}
+  progressBar: {fileID: 0}
 --- !u!1 &1156047575
 GameObject:
   m_ObjectHideFlags: 0
