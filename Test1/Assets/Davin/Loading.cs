@@ -1,34 +1,27 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
-public class LoadingScreen : MonoBehaviour
+public class SimpleLoader : MonoBehaviour
 {
-    public GameObject loadingPanel;
+    public GameObject loadingScreen;
     public Slider progressBar;
 
     public void LoadLevel(int sceneIndex)
     {
-        StartCoroutine(LoadAsynchronously(sceneIndex));
+        StartCoroutine(LoadAsync(sceneIndex));
     }
 
-    IEnumerator LoadAsynchronously(int sceneIndex)
+    IEnumerator LoadAsync(int sceneIndex)
     {
-        // Start the background loading operation
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneIndex);
+        loadingScreen.SetActive(true);
 
-        // Show the loading UI
-        loadingPanel.SetActive(true);
-
-        while (!operation.isDone)
+        while (!op.isDone)
         {
-            // operation.progress ranges from 0 to 0.9. 
-            // Normalize it to 0-1 for the slider.
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            
-            progressBar.value = progress;
-
+            // Progress goes from 0 to 0.9 before completion
+            progressBar.value = Mathf.Clamp01(op.progress / 0.9f);
             yield return null;
         }
     }
