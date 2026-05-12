@@ -5,42 +5,32 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Melee")]
     [SerializeField] private Transform meleeHitbox;
+    [SerializeField] private SpriteRenderer meleeSprite;
     [SerializeField] private float meleeRadius = 0.8f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float[] comboDamage = { 5f, 8f, 10f, 20f };
 
-    [Header("Ranged")]
-    [SerializeField] private Transform projectileSpawn;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float rangedCooldown = 0.5f;
-
     [Header("Combo Settings")]
     [SerializeField] private float comboWindow = 0.6f;
+    [SerializeField] private float hitboxVisibleDuration = 0.1f;
 
     private int comboStep = 0;
     private float comboTimer = 0f;
-    private float rangedCooldownTimer = 0f;
+    private float hitboxTimer = 0f;
     private int facingDirection = 1;
+
+    private void Start()
+    {
+        HideHitbox();
+    }
 
     private void Update()
     {
         TrackFacing();
         TickTimers();
-        HandleInput();
-    }
 
-    private void HandleInput()
-    {
-        var keyboard = Keyboard.current;
-        var mouse    = Mouse.current;
-
-        // Left click = melee
-        bool meleePressed  = mouse    != null && mouse.leftButton.wasPressedThisFrame;
-        // Z key = ranged
-        bool rangedPressed = keyboard != null && keyboard.zKey.wasPressedThisFrame;
-
-        if (meleePressed)  TryMeleeHit();
-        if (rangedPressed) TryRangedShot();
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            TryMeleeHit();
     }
 
     private void TryMeleeHit()
@@ -49,11 +39,12 @@ public class PlayerAttack : MonoBehaviour
             comboStep = 0;
 
         PerformMeleeHit(comboStep);
-        comboStep++;
+        comboStep = (comboStep + 1) % comboDamage.Length;
         comboTimer = comboWindow;
 
-        if (comboStep >= comboDamage.Length)
-            comboStep = 0;
+        // Show hitbox briefly
+        ShowHitbox();
+        hitboxTimer = hitboxVisibleDuration;
     }
 
     private void PerformMeleeHit(int step)
@@ -70,22 +61,28 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void TryRangedShot()
+    private void ShowHitbox()
     {
-        if (rangedCooldownTimer > 0f || projectileSpawn == null || projectilePrefab == null)
-            return;
+        if (meleeHitbox != null) meleeHitbox.GetComponent<Collider2D>().enabled = true;
+        if (meleeSprite  != null) meleeSprite.enabled = true;
+    }
 
-        GameObject proj = Instantiate(
-            projectilePrefab, projectileSpawn.position, Quaternion.identity);
-        proj.GetComponent<Projectile>()?.Init(new Vector2(facingDirection, 0f));
-
-        rangedCooldownTimer = rangedCooldown;
+    private void HideHitbox()
+    {
+        if (meleeHitbox != null) meleeHitbox.GetComponent<Collider2D>().enabled = false;
+        if (meleeSprite  != null) meleeSprite.enabled = false;
     }
 
     private void TickTimers()
     {
-        comboTimer          = Mathf.Max(0f, comboTimer          - Time.deltaTime);
-        rangedCooldownTimer = Mathf.Max(0f, rangedCooldownTimer - Time.deltaTime);
+        comboTimer = Mathf.Max(0f, comboTimer - Time.deltaTime);
+
+        if (hitboxTimer > 0f)
+        {
+            hitboxTimer -= Time.deltaTime;
+            if (hitboxTimer <= 0f)
+                HideHitbox();
+        }
     }
 
     private void TrackFacing()
