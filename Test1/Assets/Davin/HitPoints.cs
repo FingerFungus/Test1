@@ -21,7 +21,7 @@ public class HitPoints : MonoBehaviour
         
     }
     // Update is called once per frame
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
