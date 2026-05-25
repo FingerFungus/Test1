@@ -2,29 +2,28 @@ using UnityEngine;
 
 public class HitPoints : MonoBehaviour
 {
-
     public int maxHealth = 100;
     public int currentHealth;
 
-
-    public HealthBar healthBar;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        currentHealth = maxHealth; // Reset health at start
     }
 
-    void Update()
+    public void TakeDamage(int amount)
     {
-        
-    }
-    // Update is called once per frame
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
+        currentHealth -= amount;
+        Debug.Log("Player Health: " + currentHealth);
 
-        healthBar.SetHealth(currentHealth);
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Player Died!");
+        // Add death logic here (e.g., Reload Scene, Destroy object)
     }
 }
