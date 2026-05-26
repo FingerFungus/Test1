@@ -3,15 +3,28 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public void SetMaxHealth(int health)
-    {
-        slider.maxValue = health;
-        slider.value = health;
-    }
     public Slider slider;
+    public HitPoints playerHitPoints;
 
-    public void SetHealth(int health)
+    void Start()
     {
-        slider.value = health;
+        // Set slider range to match max health
+        slider.minValue = 0;
+        slider.maxValue = playerHitPoints.maxHealth;
+        slider.value    = playerHitPoints.maxHealth;
+
+        // Subscribe to the event — auto-updates whenever damage/heal occurs
+        playerHitPoints.onHealthChanged.AddListener(UpdateBar);
+    }
+
+    void UpdateBar(int newHealth)
+    {
+        slider.value = newHealth;
+    }
+
+    void OnDestroy()
+    {
+        // Always clean up listeners to avoid memory leaks
+        playerHitPoints.onHealthChanged.RemoveListener(UpdateBar);
     }
 }
