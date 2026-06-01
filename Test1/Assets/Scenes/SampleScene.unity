@@ -1880,6 +1880,7 @@ GameObject:
   - component: {fileID: 1578197705}
   - component: {fileID: 1578197704}
   - component: {fileID: 1578197703}
+  - component: {fileID: 1578197707}
   m_Layer: 0
   m_Name: main Camera
   m_TagString: Untagged
@@ -2005,6 +2006,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1578197707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578197702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2491bcfaed951954993a4cc2e6ce1848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoothCameraFollow
+  target: {fileID: 1043967401}
+  damping: 0.5
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1601543461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,8 +2238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac708fda6a1213478510ff9c33057e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPoints
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 50
+  currentHealth: 50
   iFrameDuration: 0.5
   onDamageTaken:
     m_PersistentCalls:
