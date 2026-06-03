@@ -9,12 +9,12 @@ public class SmoothCameraFollow : MonoBehaviour
 
    private Vector3 vel = Vector3.zero;
 
-   private void FixedUpdate()
-    {
-        Vector3 targetPosition = target.position + offset;
-
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref vel, damping);
-
-    }
+private void LateUpdate()
+{
+    Vector3 targetPosition = target.position + offset;
+    Debug.Log("Target Y: " + target.position.y + " | Camera Y: " + transform.position.y);
+    transform.position = Vector3.SmoothDamp(
+        transform.position, targetPosition, ref vel, damping);
+}
 
 }
