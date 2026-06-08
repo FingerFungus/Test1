@@ -2648,7 +2648,7 @@ GameObject:
   - component: {fileID: 534195200}
   - component: {fileID: 534195199}
   m_Layer: 5
-  m_Name: winGame
+  m_Name: winPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5779,7 +5779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67c83734da8f9f49b98e3006ce6efbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinGame
-  winPanel: {fileID: 0}
+  winPanel: {fileID: 534195197}
 --- !u!1 &1063695975
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,8 +9,8 @@ public class WinGame : MonoBehaviour
 
     void Start()
     {
-    
-        winPanel.SetActive(false);
+        if (winPanel != null)
+            winPanel.SetActive(false);
     }
 
     public void TriggerWin()
