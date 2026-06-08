@@ -14,7 +14,10 @@ public class DashAbility : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isDashing = false;
-    private bool canDash = true;
+
+    // MUST be public so DashBlocker can access it
+    public bool canDash = true;
+
     private Vector2 moveInput;
     private Vector2 facingDirection = Vector2.right;
 
