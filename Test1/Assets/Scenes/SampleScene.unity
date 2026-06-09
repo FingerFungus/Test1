@@ -1557,6 +1557,7 @@ GameObject:
   - component: {fileID: 386250454}
   - component: {fileID: 386250456}
   - component: {fileID: 386250455}
+  - component: {fileID: 386250457}
   m_Layer: 6
   m_Name: Ground (9)
   m_TagString: Untagged
@@ -1609,7 +1610,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1684,6 +1685,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &386250457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386250453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4cdb348505f8a40a7ddb41c2ba1eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WinTrigger2D
+  winGame: {fileID: 0}
+  playerTag: Player
+  oneUse: 1
 --- !u!1 &396784333
 GameObject:
   m_ObjectHideFlags: 0
