@@ -21,10 +21,10 @@ public class PlayerDeath : MonoBehaviour
         // Disable player input/movement here if you have a player controller
         // e.g. GetComponent<PlayerController>().enabled = false;
 
-        Invoke(nameof(ReloadScene), deathDelay);
+        Invoke(nameof(LoadMenuScene), deathDelay);
     }
 
-    void ReloadScene()
+    void LoadMenuScene()
     {
         SceneManager.LoadScene("Menu");
     }
